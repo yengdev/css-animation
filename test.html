@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<style>
+			div {
+				width: 20px;
+				height: 20px;
+				background-color: red;
+				position: relative;
+				/* animation-name: example; */
+				animation-duration: 4s;
+				animation-iteration-count: infinite;
+				border-radius: 50px;
+			}
+
+			@keyframes example {
+				0% {
+					background-color: red;
+					left: 0px;
+					top: 0px;
+					transform: scale(1);
+					opacity: 1;
+				}
+				25% {
+					width: 100px;
+					height: 100px;
+					background-color: yellow;
+					left: 200px;
+					top: 0px;
+					transform: scale(0.75);
+					opacity: 0.3;
+					transform: rotate(90deg);
+					border-radius: 10px;
+				}
+				50% {
+					background-color: blue;
+					left: 200px;
+					top: 200px;
+					transform: scale(0.5);
+					opacity: 0.6;
+					transform: rotate(-0.25turn);
+					border-radius: 20px;
+				}
+				75% {
+					background-color: green;
+					left: 0px;
+					top: 200px;
+					transform: scale(0.25);
+					opacity: 0.8;
+					transform: rotate(3.142rad);
+					border-radius: 0px;
+				}
+				100% {
+					background-color: red;
+					left: 0px;
+					top: 0px;
+					transform: scale(0.1);
+					opacity: 1;
+					transform: rotate(90deg);
+					border-radius: 50px;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<div id="box"></div>
+		<script>
+			function createCss(left = 0, top = 0, left1 = 100, top1 = 0) {
+				const style = document.createElement('style')
+				style.type = 'text/css'
+
+				const test = `
+			@keyframes move {
+				0% {
+					background-color: red;
+					left: ${left}px;
+					top: ${top}px;
+					transform: scale(1);
+					opacity: 1;
+					width: 100px;
+					height: 100px;
+				}
+				100% {
+					background-color: blue;
+					left: ${left1}px;
+					top: ${top1}px;
+					transform: scale(0.1);
+					opacity: 1;
+					transform: rotate(90deg);
+					border-radius: 50px;
+					width: 100px;
+					height: 100px;
+				}
+			}
+			`
+				style.innerHTML = test
+
+				document.getElementsByTagName('head')[0].appendChild(style)
+			}
+
+			const box = document.getElementById('box')
+
+			let origin1 = 0
+			let origin2 = 0
+
+			function goNow() {
+				let random = origin1
+				let random1 = origin2
+
+				let random2 = Math.floor(Math.random() * 1000)
+				let random3 = Math.floor(Math.random() * 1000)
+
+				createCss(random, random1, random2, random3)
+
+				origin1 = random2
+				origin2 = random3
+
+				box.style.animationName = 'move'
+			}
+
+			goNow()
+			setInterval(() => {
+				goNow()
+			}, 4000)
+		</script>
+	</body>
+</html>
